@@ -659,13 +659,18 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
         <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",padding:"6px 14px",borderRadius:20,cursor:"pointer",marginBottom:14,fontSize:13}}>← Indietro</button>
         <h2 style={{color:"white",fontFamily:"Lora,serif",margin:"0 0 4px",fontSize:20}}>{oliveto.nome}</h2>
         <p style={{color:"#86efac",margin:0,fontSize:13}}>{oliveto.loc} · {oliveto.var} · {oliveto.piante} piante · {oliveto.ha} ha</p>
-        {oliveto.lat&&oliveto.lng&&(
-          <a href={`https://www.google.com/maps?q=${oliveto.lat},${oliveto.lng}&z=16`} target="_blank" rel="noreferrer"
-            style={{color:"#86efac",margin:"5px 0 0",fontSize:12,fontFamily:"monospace",display:"inline-flex",alignItems:"center",gap:5,textDecoration:"none",background:"rgba(255,255,255,0.12)",padding:"4px 10px",borderRadius:8,cursor:"pointer"}}>
-            📍 {oliveto.lat}, {oliveto.lng} <span style={{fontSize:11,opacity:0.8}}>↗ Maps</span>
+        
+        {/* CORREZIONE RIGA 444: Link alla mappa satellitare corretto */}
+        {oliveto.lat && oliveto.lng && (
+          <a href={`https://www.google.com/maps/@?api=1&map_action=map&center=${oliveto.lat},${oliveto.lng}&zoom=18&basemap=satellite`} 
+             target="_blank" 
+             rel="noreferrer"
+             style={{color:"#86efac", margin:"8px 0 0", fontSize:12, fontFamily:"monospace", display:"inline-flex", alignItems:"center", gap:5, textDecoration:"none", background:"rgba(255,255,255,0.12)", padding:"6px 12px", borderRadius:8, cursor:"pointer"}}>
+            📍 Vedi su Mappa Satellitare <span style={{fontSize:11, opacity:0.8}}>↗</span>
           </a>
         )}
       </div>
+
       <div style={{padding:"12px 14px 0",display:"flex",gap:10}}>
         {lr&&<div style={{flex:1,background:r.bg,border:`1.5px solid ${r.border}`,borderRadius:14,padding:12}}>
           <div style={{fontSize:10,fontWeight:700,color:mutedC,marginBottom:3}}>ULTIMA TRAPPOLA</div>
@@ -684,6 +689,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
           ))}
         </div>}
       </div>
+
       <div style={{display:"flex",gap:6,padding:"12px 14px 0",overflowX:"auto"}}>
         {tabs.map(([id,lbl])=>(
           <button key={id} onClick={()=>setTab(id)}
@@ -692,6 +698,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
           </button>
         ))}
       </div>
+
       <div style={{padding:14}}>
         {tab==="grafici"&&<>
           <h4 style={{margin:"0 0 12px",fontFamily:"Lora,serif",fontSize:16}}>Andamento monitoraggio</h4>
@@ -708,6 +715,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
             ))}
           </div>
         </>}
+
         {tab==="trappole"&&<>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
             <h4 style={{fontFamily:"Lora,serif",fontSize:16}}>Monitoraggi trappole</h4>
@@ -723,6 +731,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
               <div style={{textAlign:"right"}}><div style={{fontSize:28,fontWeight:700,color:rr.c,fontFamily:"Lora,serif"}}>{r.mosche}</div><span className="tag" style={{background:rr.c,color:"white"}}>{rr.l}</span></div>
             </div>);})}
         </>}
+
         {tab==="stereo"&&<>
           <h4 style={{margin:"0 0 12px",fontFamily:"Lora,serif",fontSize:16}}>Controlli stereoscopio</h4>
           {mySter.length===0&&<p style={{color:mutedC,textAlign:"center",padding:20}}>Nessun controllo ancora</p>}
@@ -743,6 +752,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
               </div>
             </div>);})}
         </>}
+
         {tab==="trattamenti"&&<>
           <h4 style={{margin:"0 0 12px",fontFamily:"Lora,serif",fontSize:16}}>Trattamenti effettuati</h4>
           {myTrat.length===0&&<p style={{color:mutedC,textAlign:"center",padding:20}}>Nessun trattamento registrato</p>}
@@ -762,6 +772,7 @@ function OlivetoDetail({oliveto,user,onBack,nav,rils,sters,trats,traps,setTraps,
     </div>
   );
 }
+
 
 // ═══════════ CLIENT HOME ═══════════
 function ClientHome({user,oliveti,rils,sters,trats,nav,dark}){
